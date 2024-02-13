@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+typedef struct node *NODE;
+
+void display(NODE root)
+{
+    if(root!=NULL)
+    {
+        display(root->left);
+        printf("%d\t",root->data);
+        display(root->right);
+    }
+}
+
+NODE createnode(NODE root,int item)
+{
+    NODE temp;
+    temp=(NODE)malloc(sizeof(struct node));
+    temp->data=item;
+    temp->left=NULL;
+    temp->right=NULL;
+    return temp;
+}
+
+NODE insertleft(NODE root,int item)
+{
+    root->left=createnode(root,item);
+    return root->left;
+}
+
+NODE insertright(NODE root,int item)
+{
+    root->right=createnode(root,item);
+    return root->right;
+}
+
+int count_nodes(NODE root)
+{
+    if(root==NULL)
+        return 0;
+    else    
+        return count_nodes(root->left) + count_nodes(root->right) + 1;
+}
+
+int height(NODE root)
+{
+    if(root==NULL)
+        return -1;
+    else    
+    {
+        int lh=height(root->left);
+        int rh=height(root->right);
+        if(lh>rh)
+            return lh+1;
+        else
+            return rh+1;
+    }
+}
+
+int leaf_nodes(NODE root)
+{
+    if(root==NULL)
+        return 0;
+    else if(root->left == NULL && root->right == NULL)
+        return 1;
+    else    
+        return leaf_nodes(root->left) + leaf_nodes(root->right) + 1;
+}
+
+int nonleaf_nodes(NODE root)
+{
+    if(root==NULL || (root->left==NULL && root->right==NULL))
+        return 0;
+    else    
+        return nonleaf_nodes(root->left) + nonleaf_nodes(root->right) + 1;
+}
+
+int main()
+{
+    NODE root=NULL;
+    root=createnode(root,10);
+    insertleft(root,20);
+    insertright(root,30);
+    insertleft(root->left,60);
+    insertright(root->left,50);
+    insertright(root->right,40);
+    insertright(root->left->right,70);
+    printf("\n The Inorder traversal is\n");
+    display(root);
+    printf("\n");
+    printf("\n The total number of nodes is %d\n",count_nodes(root));
+    printf("\n The height of the tree is %d\n",height(root));
+    printf("\n The total number of leaf nodes is %d\n",leaf_nodes(root));
+    printf("\n The total number of non-leaf nodes is %d\n",nonleaf_nodes(root));
+ return 0;
+}
