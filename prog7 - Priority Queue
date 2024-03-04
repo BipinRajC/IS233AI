@@ -1,13 +1,13 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 
 void heapify(int a[10], int n) {
     int i, k, v, j, flag = 0;
-    for (i = n / 2; i >= 1; i--) {
+    for (i = n/2; i>=1; i--) {
         k = i;
         v = a[k];
-        while (!flag && 2 * k <= n) {
-            j = 2 * k;
+        while (!flag && 2*k <= n) {
+            j = 2*k;
             if (j < n) {
                 if (a[j] < a[j + 1])
                     j = j + 1;
@@ -50,8 +50,7 @@ int main() {
                         n = n - 1;
                         heapify(a, n);
                         if (n != 0) {
-                            printf("\n Elements after reconstructing 
-                                heap\ n ");
+                            printf("\n Elements after reconstructing heap\n");
                                 for (i = 1; i <= n; i++)
                                     printf("%d\t", a[i]);
                             }
