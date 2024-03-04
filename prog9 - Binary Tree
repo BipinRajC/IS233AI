@@ -70,7 +70,7 @@ int leaf_nodes(NODE root)
     else if(root->left == NULL && root->right == NULL)
         return 1;
     else    
-        return leaf_nodes(root->left) + leaf_nodes(root->right) + 1;
+        return leaf_nodes(root->left) + leaf_nodes(root->right);
 }
 
 int nonleaf_nodes(NODE root)
