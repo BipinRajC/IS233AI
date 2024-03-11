@@ -10,10 +10,10 @@ struct stack {
 };
 typedef struct stack STACK;
 void push(STACK * s, float item) {
-    s - > data[++(s - > top)] = item;
+    s -> data[++(s -> top)] = item;
 }
 float pop(STACK * s) {
-    return s - > data[(s - > top) --];
+    return s -> data[(s -> top) --];
 }
 float operate(float op1, float op2, char symbol) {
     switch (symbol) {
